@@ -1,9 +1,12 @@
 -module(csv).
--export([parse_csv/1, parse/1]).
+-export([process/2]).
 
 parse_csv (Line) ->
     Lines = re:split(Line, ",", [{return, list}]).
 
 parse (Lines) ->
     lists:map (fun (Line) -> parse_csv (Line) end, Lines).
+
+process (Lines, F) ->
+    lists:map (fun (Tokens) -> F (Tokens) end, parse (Lines)).
 
