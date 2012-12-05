@@ -3,6 +3,7 @@ Things that tripped me out:
 - It took me a while to figure out compile:file won't recompile for you.
 - Trying to call functions without their namespace before it was confusing for a bit.
 - This would really suck if I didn't install erlang-mode before I got started.
+- Not sure what {return, list} is for re:split.
 - It's not obvious to me, yet, how to use the map function without actually passing in a "fun" expression.
 - I'm leveraging existing knowledge of the map function a lot. If I didn't have that, this would be confusing for sure.
 - While completing step 4, it's still annoying that I can't figure out how to pass a function by it's name.
