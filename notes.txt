@@ -3,5 +3,5 @@ Things that tripped me out:
 - It took me a while to figure out compile:file won't recompile for you.
 - Trying to call functions without their namespace before it was confusing for a bit.
 - This would really suck if I didn't install erlang-mode before I got started.
-
+- It's not obvious to me, yet, how to use the map function without actually passing in a "fun" expression.
 
