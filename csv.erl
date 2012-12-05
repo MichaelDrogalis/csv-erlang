@@ -8,7 +8,7 @@ parse (Lines) ->
     lists:map (fun (Line) -> parse_csv (Line) end, Lines).
 
 process (Lines, F) ->
-    lists:map (fun (Tokens) -> F (list_to_tuple(Tokens)) end, parse (Lines)).
+    lists:map (fun (Tokens) -> F (list_to_tuple (Tokens)) end, parse (Lines)).
 
 process_file (FileName, F) ->
     {ok, Device} = file:open (FileName, [read]),
