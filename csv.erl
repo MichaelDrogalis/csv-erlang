@@ -8,7 +8,7 @@ parse (Lines) ->
     lists:map (fun (Line) -> parse_csv (Line) end, Lines).
 
 process (Lines, F) ->
-    lists:map (fun (Tokens) -> F (list_to_tuple(Tokens)) end, parse (Lines)).
+    lists:map (fun (Tokens) -> F (list_to_tuple (Tokens)) end, parse (Lines)).
 
 process_file (FileName, F) ->
     {ok, Device} = file:open (FileName, [read]),
@@ -17,8 +17,8 @@ process_file (FileName, F) ->
     process (Lines, F).
 
 get_all_lines (Device) ->
-        case io:get_line (Device, "") of
-            eof  -> [];
-            Line -> Line ++ get_all_lines (Device)
-        end.
+    case io:get_line (Device, "") of
+        eof  -> [];
+        Line -> Line ++ get_all_lines (Device)
+    end.
 
