@@ -17,8 +17,8 @@ process_file (FileName, F) ->
     process (Lines, F).
 
 get_all_lines (Device) ->
-        case io:get_line (Device, "") of
-            eof  -> [];
-            Line -> Line ++ get_all_lines (Device)
-        end.
+    case io:get_line (Device, "") of
+        eof  -> [];
+        Line -> Line ++ get_all_lines (Device)
+    end.
 
