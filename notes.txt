@@ -7,3 +7,5 @@ Things that tripped me out:
 - I'm leveraging existing knowledge of the map function a lot. If I didn't have that, this would be confusing for sure.
 - While completing step 4, it's still annoying that I can't figure out how to pass a function by it's name.
 - The instructions are very good so far.
+- I'm seeing why Clojure makes such a big deal about it's sequence abstractions. Erlang's "size" functions just works for tuples, need "length" for arrows. Stumbled upon this as I was using it as my function parameter.
+
