@@ -1,10 +1,12 @@
 -module(csvs).
--export([open/1, service_loop/1, test_connection/0]).
+-export([open/1, service_loop/1, next/1, close/1]).
 
 open (FileName) ->
     Lines = csv:process_file (FileName, fun identity/1),
     spawn (csvs, service_loop, [Lines]).
 
+%% The interface expects a function parameter, so why not just pass in
+%% an indentity operation? Works for this, I guess.
 identity (X) ->
     X.
 
@@ -21,13 +23,18 @@ service_loop (Lines) ->
         {_, Pid} -> Pid ! {error, bad_request}
     end.
 
-test_connection () ->
-    Pid = open("file.csv"),
-    Pid ! {closex, self()},
+next (Handle) ->
+    Handle ! {next_record, self()},
     receive
-        {ok, eof} -> io:format("Aaaand we're done.~n");
-        {ok, closed} -> io:format("Closed.~n");
-        {ok, Tuple} -> io:format("~p ~n", [Tuple]);
-        {error, bad_request} -> io:format("Bad request..~n")
+        {ok, eof} -> "Done";
+        {ok, Tuple} -> Tuple;
+        {error, bad_request} -> "Bad request"
     end.
+    
+close (Handle) ->
+    Handle ! {close, self()},
+    receive
+        {ok, closed} -> "Closed";
+        {error, bad_request} -> "Bad request"
+    end. 
 
