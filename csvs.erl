@@ -15,7 +15,7 @@ name_to_field (Options) ->
     Fields = hd (Options),
     Handle = hd (tl (Options)),
     Tuple = next(Handle),
-    [Fields] ++ [Tuple].
+    lists:zip (tuple_to_list (Fields), tuple_to_list(Tuple)).
 
 %% The interface expects a function parameter, so why not just pass in
 %% an indentity operation? Works for this, I guess.
