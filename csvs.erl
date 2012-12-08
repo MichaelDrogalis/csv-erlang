@@ -1,9 +1,21 @@
 -module(csvs).
--export([open/1, service_loop/1, next/1, close/1]).
+-export([open/1, open/2, name_to_field/1, service_loop/1, next/1, close/1]).
 
 open (FileName) ->
     Lines = csv:process_file (FileName, fun identity/1),
     spawn (csvs, service_loop, [Lines]).
+
+open (FileName, true) ->
+    Pid = open(FileName),
+    [next(Pid)] ++ [Pid];
+open (FileName, false) ->
+    open(FileName).
+
+name_to_field (Options) ->
+    Fields = hd (Options),
+    Handle = hd (tl (Options)),
+    Tuple = next(Handle),
+    [Fields] ++ [Tuple].
 
 %% The interface expects a function parameter, so why not just pass in
 %% an indentity operation? Works for this, I guess.
